@@ -1,0 +1,2 @@
+# Microsoft webcam camera
+The LifeCam VX-800 Webcam (Black and Gray) from Microsoft is a no-nonsense webcam for use with Windows computer systems. The USB camera features VGA (640 x 480) resolution and a built-in mic for audio.
