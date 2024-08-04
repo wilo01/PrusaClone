@@ -1,0 +1,126 @@
+[server]
+host = 0.0.0.0
+port = 7125
+max_upload_size = 1024
+klippy_uds_address = ~/printer_data/comms/klippy.sock
+
+[file_manager]
+enable_object_processing = True
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+
+[octoprint_compat]
+
+[history]
+
+[announcements]
+subscriptions = 
+	mainsail
+
+[update_manager]
+refresh_interval = 168
+enable_auto_refresh = True
+
+[update_manager mainsail]
+type = web
+channel = stable
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager mainsail-config]
+type = git_repo
+primary_branch = master
+path = ~/mainsail-config
+origin = https://github.com/mainsail-crew/mainsail-config.git
+managed_services = klipper
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/install.sh
+
+[update_manager sonar]
+type = git_repo
+path = ~/sonar
+origin = https://github.com/mainsail-crew/sonar.git
+primary_branch = main
+managed_services = sonar
+install_script = tools/install.sh
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager Klipper-Adaptive-Meshing-Purging]
+type = git_repo
+channel = dev
+path = ~/Klipper-Adaptive-Meshing-Purging
+origin = https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git
+managed_services = klipper
+primary_branch = main
+
+[notifier pushover_error]
+url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=emergency&expire=3600&retry=300&sound=alien
+events = error
+title = voron3: EMERG - {event_args[1].filename}
+body = {event_name}: {event_args[1].message}
+attach = http://localhost/webcam/?action=snapshot
+
+[notifier pushover_cancel]
+url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=emergency&sound=siren
+events = cancelled
+title = voron3: EMERG - {event_args[1].filename}
+body = {event_name}: {event_args[1].message}
+attach = http://localhost/webcam/?action=snapshot
+
+[notifier pushover_pause]
+url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=high&expire=1800&retry=180&sound=tugboat
+events = pause
+title = voron3: HIGH - {event_name}d
+body = {event_name}d: {event_args[1].filename}
+attach = http://localhost/webcam/?action=snapshot
+
+[notifier pushover_resume]
+url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=high&sound=tugboat
+events = resume
+title = voron3: HIGH - {event_name}d
+body = {event_name}d: {event_args[1].filename}
+attach = http://localhost/webcam/?action=snapshot
+
+[notifier pushover_start]
+url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}
+events = started
+title = voron3: Starting to print
+body = Printing: {event_args[1].filename}
+
+[notifier pushover_complete]
+url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}
+events = complete
+title = voron3: Print completed
+body = Completed: {event_args[1].filename}
+attach = http://localhost/webcam/?action=snapshot
+
+[notifier gcode_pushover]
+url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}
+events = gcode
+title = rue: {event_message}
+body = rue: {event_message}
+attach = http://localhost/webcam/?action=snapshot
+
