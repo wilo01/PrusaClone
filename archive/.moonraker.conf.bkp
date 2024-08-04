@@ -76,51 +76,11 @@ origin = https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git
 managed_services = klipper
 primary_branch = main
 
-[notifier pushover_error]
-url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=emergency&expire=3600&retry=300&sound=alien
-events = error
-title = voron3: EMERG - {event_args[1].filename}
-body = {event_name}: {event_args[1].message}
-attach = http://localhost/webcam/?action=snapshot
-
-[notifier pushover_cancel]
-url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=emergency&sound=siren
-events = cancelled
-title = voron3: EMERG - {event_args[1].filename}
-body = {event_name}: {event_args[1].message}
-attach = http://localhost/webcam/?action=snapshot
-
-[notifier pushover_pause]
-url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=high&expire=1800&retry=180&sound=tugboat
-events = pause
-title = voron3: HIGH - {event_name}d
-body = {event_name}d: {event_args[1].filename}
-attach = http://localhost/webcam/?action=snapshot
-
-[notifier pushover_resume]
-url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}?priority=high&sound=tugboat
-events = resume
-title = voron3: HIGH - {event_name}d
-body = {event_name}d: {event_args[1].filename}
-attach = http://localhost/webcam/?action=snapshot
-
-[notifier pushover_start]
-url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}
-events = started
-title = voron3: Starting to print
-body = Printing: {event_args[1].filename}
-
-[notifier pushover_complete]
-url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}
-events = complete
-title = voron3: Print completed
-body = Completed: {event_args[1].filename}
-attach = http://localhost/webcam/?action=snapshot
-
-[notifier gcode_pushover]
-url = pover://{secrets.pushover_creds.user}@{secrets.pushover_creds.token}/{secrets.pushover_creds.device}
-events = gcode
-title = rue: {event_message}
-body = rue: {event_message}
-attach = http://localhost/webcam/?action=snapshot
+[update_manager client moonraker-telegram]
+type = git_repo
+path = /home/pi/moonraker-telegram
+origin = https://github.com/Raabi91/moonraker-telegram.git
+env = /home/pi/.moonraker-telegram-env/bin/python
+requirements = scripts/moonraker-telegram-requirements.txt
+install_script = scripts/install.sh
 
