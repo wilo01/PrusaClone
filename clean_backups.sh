@@ -17,3 +17,5 @@
 # along with config.  If not, see <http://www.gnu.org/licenses/>.
 
 /home/pi/printer_data/config/move_files.sh /home/pi/printer_data/config/ /home/pi/printer_data/config/archive/ "/home/pi/printer_data/config/printer-*.cfg"
+/home/pi/printer_data/config/move_files.sh /home/pi/printer_data/config/ /home/pi/printer_data/config/archive/ "/home/pi/printer_data/config/crowsnest.conf.*"
+/home/pi/printer_data/config/move_files.sh /home/pi/printer_data/config/ /home/pi/printer_data/config/archive/ "/home/pi/printer_data/config/.moonraker*.bkp"
